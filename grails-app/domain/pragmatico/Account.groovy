@@ -21,15 +21,12 @@ class Account implements Serializable {
   Date lastUpdated
 
   static constraints = {
-    password nullable: false, blank: false, password: true
     username nullable: false, blank: false, unique: true
+    password nullable: false, blank: false, password: true
   }
 
   static mapping = {
     username index: true, indexAttributes: [unique: true, dropDups: true]
-  }
-
-  void setPassword(String pwd) {
-    password = pwd.encodeAsSHA256()
+    password index: true
   }
 }
