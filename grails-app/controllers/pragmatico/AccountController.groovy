@@ -12,9 +12,9 @@ class AccountController {
     try {
       respond([token: signUpService.viaCreds(data.username, data.password)])
     } catch (ValidationException e) {
-      respond([errors: e.errors.allErrors.toArray().join('\n')], status: 422)
+      respond([error: e.errors.fieldError.defaultMessage], status: 422)
     } catch (Exception e) {
-      respond([errors: e.message], status: 422)
+      respond([error: e.message], status: 422)
     }
   }
 
@@ -24,7 +24,7 @@ class AccountController {
     try {
       respond([token: signInService.viaCreds(data.username, data.password)])
     } catch (Exception e) {
-      respond([errors: e.message], status: 422)
+      respond([error: e.message], status: 422)
     }
   }
 }
