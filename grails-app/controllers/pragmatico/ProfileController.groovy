@@ -7,6 +7,6 @@ class ProfileController {
 	static responseFormats = ['json']
 	
   def update() {
-    request.JSON
+    respond request.JSON
   }
 }

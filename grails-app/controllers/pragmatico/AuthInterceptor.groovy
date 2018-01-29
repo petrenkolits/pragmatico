@@ -2,12 +2,19 @@ package pragmatico
 
 class AuthInterceptor {
   AuthInterceptor() {
-    matchAll().except()
+    matchAll().except(controller: "account")
   }
 
   boolean before() {
-    println('oooooops')
-    true
+    def hash = JwtService.decodeFromAuthHeader(request.getHeader('Authorization'))
+
+    if (hash && hash['id']) {
+      println("ID: ${hash['id']}")
+      return true
+    }
+
+    response.sendError(401)
+    false
   }
 
   boolean after() { true }

@@ -18,6 +18,22 @@ class JwtService {
   }
 
   static Object decode(String token) {
-    Jwts.parser().setSigningKey(key).parseClaimsJws(token).body
+    try {
+      Jwts.parser().setSigningKey(key).parseClaimsJws(token).body
+    } catch(Exception all) {
+      println('JwtService:: failed to decode token!')
+//      log.fatal('JwtService:: failed to decode token!')
+    }
+  }
+
+  static Object decodeFromAuthHeader(String authHeader) {
+    if (authHeader) {
+      def token = authHeader.split(' ').last()
+
+      if (token) {
+        println("Token: ${token}")
+        return decode(token)
+      }
+    }
   }
 }

@@ -18,6 +18,6 @@ class SignInService {
       throw new Exception('Invalid credentials')
     }
 
-    JwtService.encode([id: account.id] as Map)
+    JwtService.encode([id: account.id.toString()] as Map)
   }
 }

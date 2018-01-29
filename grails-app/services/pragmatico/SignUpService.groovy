@@ -20,6 +20,6 @@ class SignUpService {
     }
 
     account.save()
-    JwtService.encode([id: account.id] as Map)
+    JwtService.encode([id: account.id.toString()] as Map)
   }
 }
