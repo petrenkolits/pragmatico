@@ -3,7 +3,6 @@ package pragmatico
 import grails.validation.ValidationException
 
 class AccountController {
-  static responseFormats = ['json']
   def signUpService
   def signInService
 

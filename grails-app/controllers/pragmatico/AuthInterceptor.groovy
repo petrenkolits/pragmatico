@@ -9,7 +9,7 @@ class AuthInterceptor {
     def hash = JwtService.decodeFromAuthHeader(request.getHeader('Authorization'))
 
     if (hash && hash['id']) {
-      println("ID: ${hash['id']}")
+      println("User ID: ${hash['id']}")
       return true
     }
 
