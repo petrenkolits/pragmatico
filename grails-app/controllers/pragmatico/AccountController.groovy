@@ -1,8 +1,5 @@
 package pragmatico
 
-import grails.rest.*
-import grails.converters.*
-
 import grails.validation.ValidationException
 
 class AccountController {
@@ -14,18 +11,11 @@ class AccountController {
     def data = request.JSON
 
     try {
-      def t = signUpService.viaCreds(data.username, data.password)
-      render(contentType: 'application/json', status: 201) {
-        token t
-      }
+      respond([token: signUpService.viaCreds(data.username, data.password)])
     } catch (ValidationException e) {
-      render(contentType: 'application/json', status: 422) {
-        errors e.errors.allErrors.toArray().join('\n')
-      }
+      respond([errors: e.errors.allErrors.toArray().join('\n')], status: 422)
     } catch (Exception e) {
-      render(contentType: "application/json", status: 422) {
-        errors e.message
-      }
+      respond([errors: e.message], status: 422)
     }
   }
 
@@ -33,14 +23,9 @@ class AccountController {
     def data = request.JSON
 
     try {
-      def t = signInService.viaCreds(data.username, data.password)
-      render(contentType: 'application/json', status: 200) {
-        token t
-      }
+      respond([token: signInService.viaCreds(data.username, data.password)])
     } catch (Exception e) {
-      render(contentType: "application/json", status: 422) {
-        errors e.message
-      }
+      respond([errors: e.message], status: 422)
     }
   }
 }

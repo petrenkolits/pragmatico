@@ -1,9 +1,11 @@
 package pragmatico
 
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
 
 @Transactional
+@GrailsCompileStatic
 class SignUpService {
 
   def viaCreds(String username, String pwd) {
@@ -18,6 +20,6 @@ class SignUpService {
     }
 
     account.save()
-    JwtService.encode([id: account.id])
+    JwtService.encode([id: account.id] as Map)
   }
 }

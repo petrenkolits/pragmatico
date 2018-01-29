@@ -1,8 +1,10 @@
 package pragmatico
 
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 
 @Transactional
+@GrailsCompileStatic
 class SignInService {
 
   def viaCreds(String username, String pwd) {
@@ -16,6 +18,6 @@ class SignInService {
       throw new Exception('Invalid credentials')
     }
 
-    JwtService.encode([id: account.id])
+    JwtService.encode([id: account.id] as Map)
   }
 }

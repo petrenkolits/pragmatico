@@ -5,6 +5,7 @@ class UrlMappings {
   static mappings = {
     post "/sign-up"(controller: 'account', action: 'signUp')
     post "/sign-in"(controller: 'account', action: 'signIn')
+    put  "/api/profile"(controller: 'profile', action: 'update')
 
 //    delete "/$controller/$id(.$format)?"(action: "delete")
 //    get "/$controller(.$format)?"(action: "index")
