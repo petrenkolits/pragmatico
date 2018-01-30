@@ -10,11 +10,11 @@ class AccountController {
     def data = request.JSON
 
     try {
-      respond([token: signUpService.viaCreds(data.username, data.password)])
+      [token: signUpService.viaCreds(data.username, data.password)]
     } catch (ValidationException e) {
-      respond([error: e.errors.fieldError.defaultMessage], status: 422)
+      render view: '/validationError', model: [errors: e.errors]
     } catch (Exception e) {
-      respond([error: e.message], status: 422)
+      respond([message: e.message], status: 422)
     }
   }
 
@@ -22,9 +22,9 @@ class AccountController {
     def data = request.JSON
 
     try {
-      respond([token: signInService.viaCreds(data.username, data.password)])
+      [token: signInService.viaCreds(data.username, data.password)]
     } catch (Exception e) {
-      respond([error: e.message], status: 422)
+      respond([message: e.message], status: 422)
     }
   }
 }

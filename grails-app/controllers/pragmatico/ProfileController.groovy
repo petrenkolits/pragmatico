@@ -1,12 +1,9 @@
 package pragmatico
 
-import grails.rest.*
-import grails.converters.*
-
 class ProfileController implements  AuthenticatedController {
+  ProfileService profileService
+
   def update() {
-//    SampleJob.triggerNow([args: 'data'])
-    println(currentUser)
-    respond request.JSON
+    profileService.update(currentUser.id, request.JSON as Map)
   }
 }
