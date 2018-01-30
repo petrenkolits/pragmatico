@@ -2,6 +2,8 @@ package pragmatico
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
+import pragmatico.Account
+import pragmatico.JwtService
 
 @Transactional
 @GrailsCompileStatic

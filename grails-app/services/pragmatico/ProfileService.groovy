@@ -2,6 +2,7 @@ package pragmatico
 
 import grails.gorm.transactions.Transactional
 import org.bson.types.ObjectId
+import pragmatico.Account
 
 @Transactional
 class ProfileService {
