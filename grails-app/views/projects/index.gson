@@ -1,0 +1,7 @@
+import pragmatico.Project
+
+model {
+  Set<Project> projects
+}
+
+json g.render(projects)

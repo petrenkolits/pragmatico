@@ -29,4 +29,6 @@ class Account implements Serializable {
     username index: true, indexAttributes: [unique: true, dropDups: true]
     password index: true
   }
+
+  static hasMany = [projects: Project]
 }
