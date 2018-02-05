@@ -1,0 +1,9 @@
+response.status UNPROCESSABLE_ENTITY
+
+model {
+  Exception exception
+}
+
+json {
+  message exception.message
+}

@@ -14,7 +14,7 @@ class AccountController {
     } catch (ValidationException e) {
       render view: '/validationError', model: [errors: e.errors]
     } catch (Exception e) {
-      respond([message: e.message], status: 422)
+      render view: '/error', model: [error: e]
     }
   }
 
@@ -24,7 +24,7 @@ class AccountController {
     try {
       [token: signInService.viaCreds(data.username, data.password)]
     } catch (Exception e) {
-      respond([message: e.message], status: 422)
+      render view: '/exception', model: [exception: e]
     }
   }
 }
