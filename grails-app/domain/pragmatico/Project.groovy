@@ -27,16 +27,24 @@ class Project implements Serializable {
     Integer sale
   }
 
-  class TeamMember {
+  class Founder {
     String photo
     String name
-    String position
+    String desc
+    String exp
+    String fblink
+    String twitterlink
+    String linkedinlink
   }
 
   class Advisor {
     String photo
     String name
-    String position
+    String desc
+    String exp
+    String fblink
+    String twitterlink
+    String linkedinlink
   }
 
   ObjectId id
@@ -44,23 +52,35 @@ class Project implements Serializable {
   Date lastUpdated
 
   String logo
-  String projectName
-  String whatTheyDo
-  String mainKey
-  String site
-  String similarProjects
-  String differenceFromCompetitors
-  String marketVolume
-  String projectState
-  String roadmapUrl
+  String name
+  String shortdesc
+  String fulldesc
+  String sitelink
+  String whitepaper
+  String offer
+  String responsible
+  String email
+  String fblink
+  String twitterlink
+  String bitcoinlink
+  String telegramlink
+  String youtube
+  String ticker
   String whyBlockchain
   String whatTokenFor
+  String currencies
   String restTokens
   Integer softCap
   Integer hardCap
+  Integer tokenbaseprice
+  Integer tokensize
 
   @BindingFormat("yyyy-MM-dd")
   Date roadmapEnd
+  @BindingFormat("yyyy-MM-dd'T'hh:mm")
+  Date startdate
+  @BindingFormat("yyyy-MM-dd'T'hh:mm")
+  Date enddate
   @BindingFormat("yyyy-MM-dd'T'hh:mm")
   Date preIcoStart
   @BindingFormat("yyyy-MM-dd'T'hh:mm")
@@ -72,10 +92,10 @@ class Project implements Serializable {
   List<Category> categories
   List<Step> steps
   List<Period> periods
-  List<TeamMember> teamMembers
+  List<Founder> founders
   List<Advisor> advisors
 
-  static embedded = ['categories', 'steps', 'periods', 'teamMembers', 'advisors']
+  static embedded = ['categories', 'steps', 'periods', 'founders', 'advisors']
 
   static belongsTo = [account: Account]
 
