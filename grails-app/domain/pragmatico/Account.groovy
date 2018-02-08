@@ -6,7 +6,7 @@ import grails.compiler.GrailsCompileStatic
 import org.bson.types.ObjectId
 
 @GrailsCompileStatic
-@EqualsAndHashCode(includes = 'username')
+@EqualsAndHashCode(includes = 'id')
 @ToString(includes = 'username', includeNames = true, includePackage = false)
 class Account implements Serializable {
   ObjectId id

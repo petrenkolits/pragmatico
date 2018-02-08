@@ -6,7 +6,7 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import org.bson.types.ObjectId
 
-//@GrailsCompileStatic
+@GrailsCompileStatic
 @EqualsAndHashCode(includes = 'id')
 @ToString(includes = 'id', includeNames = true, includePackage = false)
 class Project implements Serializable {
@@ -88,7 +88,6 @@ class Project implements Serializable {
   @BindingFormat("yyyy-MM-dd'T'hh:mm")
   Date icoEnd
 
-
   List<Category> categories
   List<Step> steps
   List<Period> periods
@@ -99,9 +98,7 @@ class Project implements Serializable {
 
   static belongsTo = [account: Account]
 
-  static constraints = {
-  }
+//  static constraints = {}
 
-  static mapping = {
-  }
+//  static mapping = {}
 }
