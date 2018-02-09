@@ -7,15 +7,11 @@ import grails.gorm.transactions.Transactional
 @GrailsCompileStatic
 class SignInService {
 
-  def viaCreds(String username, String pwd) {
-    if (!username || !pwd) {
-      throw new Exception('Invalid credentials')
-    }
-
-    def account = Account.findByUsernameAndPassword(username, pwd.encodeAsSHA256() as String)
+  String viaCreds(String username, String pwd) {
+    Account account = Account.findByUsernameAndPassword(username, pwd.encodeAsSHA256() as String)
 
     if (!account) {
-      throw new Exception('Invalid credentials')
+      return
     }
 
     JwtService.encode([id: account.id.toString()] as Map)

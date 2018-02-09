@@ -2,7 +2,7 @@ package pragmatico
 
 class AuthInterceptor {
   AuthInterceptor() {
-    matchAll().except(controller: 'account').except(controller: 'application')
+    matchAll().except(controller: 'account').except(controller: 'application').except(view: '/error').except(view: '/notFound')
   }
 
   boolean before() {

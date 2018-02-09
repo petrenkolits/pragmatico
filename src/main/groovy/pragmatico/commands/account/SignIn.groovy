@@ -1,20 +1,27 @@
 package pragmatico.commands.account
 
+import grails.compiler.GrailsCompileStatic
 import grails.validation.Validateable
-import groovy.transform.CompileStatic
+import groovy.transform.Memoized
+import pragmatico.SignInService
 
-@CompileStatic
-class SignIn implements Validateable {
-  def signInService
+@GrailsCompileStatic
+class SignIn implements Validateable, Serializable {
+  SignInService signInService
 
   String username
   String password
-  String token
 
   static constraints = {
-    username blank: false, validator: { val, obj ->
-      obj.token = obj.signInService.viaCreds(obj.username, obj.password)
-      obj.token
+    username blank: false
+    password blank: false
+  }
+
+  @Memoized
+  String getToken() {
+    if (!username || !password) {
+      return
     }
+    signInService.viaCreds(username, password)
   }
 }

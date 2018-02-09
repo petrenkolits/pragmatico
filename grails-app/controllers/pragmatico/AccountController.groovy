@@ -4,7 +4,6 @@ import pragmatico.commands.account.SignIn
 
 class AccountController implements ExceptionHandler {
   def signUpService
-  def signInService
 
   def signUp() {
     def data = request.JSON
@@ -12,7 +11,6 @@ class AccountController implements ExceptionHandler {
   }
 
   def signIn(SignIn cmd) {
-    def data = request.JSON
-    [token: signInService.viaCreds(data.username, data.password)]
+    cmd.hasErrors() ? renderErrors(cmd.errors) : [model: cmd]
   }
 }
