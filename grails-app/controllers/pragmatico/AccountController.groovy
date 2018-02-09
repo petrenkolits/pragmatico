@@ -1,5 +1,7 @@
 package pragmatico
 
+import pragmatico.commands.account.SignIn
+
 class AccountController implements ExceptionHandler {
   def signUpService
   def signInService
@@ -9,7 +11,7 @@ class AccountController implements ExceptionHandler {
     [token: signUpService.viaCreds(data.username, data.password)]
   }
 
-  def signIn() {
+  def signIn(SignIn cmd) {
     def data = request.JSON
     [token: signInService.viaCreds(data.username, data.password)]
   }
