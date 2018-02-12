@@ -5,13 +5,15 @@ class UrlMappings {
   static mappings = {
     post "/sign-up"(controller: 'account', action: 'signUp')
     post "/sign-in"(controller: 'account', action: 'signIn')
-    put  "/api/profile"(controller: 'profile', action: 'update')
+    group '/api', {
+      put "/profile"(controller: 'profile', action: 'update')
 
-    get "/api/projects"(controller: 'projects', action: 'index')
-    post "/api/projects"(controller: 'projects', action: 'create')
+      group '/admin', {
+        "/projects"(resources: 'project', namespace: 'admin', includes: ['index', 'show'])
+      }
 
-    get "/api/admin/projects"(controller: 'projects', action: 'index', namespace: 'admin')
-    get "/api/admin/projects/$id"(controller: 'projects', action: 'show', namespace: 'admin')
+      "/projects"(resources: 'project', includes: ['index', 'create'])
+    }
 
 //    delete "/$controller/$id(.$format)?"(action: "delete")
 //    get "/$controller(.$format)?"(action: "index")
