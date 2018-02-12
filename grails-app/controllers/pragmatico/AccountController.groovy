@@ -8,6 +8,6 @@ class AccountController implements ExceptionHandler {
   }
 
   def signIn(SignIn cmd) {
-    cmd.hasErrors() ? renderErrors(cmd.errors) : [model: cmd]
+    cmd().hasErrors() ? renderErrors(cmd.errors) : [token: cmd.result]
   }
 }

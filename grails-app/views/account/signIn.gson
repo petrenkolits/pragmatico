@@ -1,9 +1,9 @@
 import pragmatico.commands.account.SignIn
 
 model {
-  SignIn model
+  String token
 }
 
 json {
-  token model.token
+  token this.token
 }

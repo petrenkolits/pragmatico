@@ -1,7 +1,6 @@
 package pragmatico
 
-import grails.rest.*
-import grails.converters.*
+import pragmatico.project.Status
 
 class ProjectsController implements AuthenticatedController, ExceptionHandler {
   def index() {
@@ -10,6 +9,7 @@ class ProjectsController implements AuthenticatedController, ExceptionHandler {
 
   def create(Project project) {
     project.account = currentUser
-    project.validate() ? project.save()  : renderErrors(project.errors)
+    project.status = Status.PENDING
+    project.validate() ? project.save() : renderErrors(project.errors)
   }
 }

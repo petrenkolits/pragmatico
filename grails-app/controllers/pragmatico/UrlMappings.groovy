@@ -10,6 +10,9 @@ class UrlMappings {
     get "/api/projects"(controller: 'projects', action: 'index')
     post "/api/projects"(controller: 'projects', action: 'create')
 
+    get "/api/admin/projects"(controller: 'projects', action: 'index', namespace: 'admin')
+    get "/api/admin/projects/$id"(controller: 'projects', action: 'show', namespace: 'admin')
+
 //    delete "/$controller/$id(.$format)?"(action: "delete")
 //    get "/$controller(.$format)?"(action: "index")
 //    get "/$controller/$id(.$format)?"(action: "show")

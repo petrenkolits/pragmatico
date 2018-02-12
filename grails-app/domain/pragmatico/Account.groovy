@@ -26,6 +26,7 @@ class Account implements Serializable {
   }
 
   static mapping = {
+    collection 'accounts'
     username index: true, indexAttributes: [unique: true, dropDups: true]
     password index: true
   }

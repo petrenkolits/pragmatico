@@ -4,10 +4,13 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 enum Status {
-  PENDING('pending'),
-  APPROVED('approved'),
-  DECLINED('declined'),
+  PENDING('PENDING'),
+  APPROVED('APPROVED'),
+  DECLINED('DECLINED')
 
-  final String id
-  private Status(String id) { this.id = id }
+  final String status
+
+  private Status(String status) {
+    this.status = status
+  }
 }

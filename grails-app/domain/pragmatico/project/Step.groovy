@@ -1,9 +1,12 @@
 package pragmatico.project
 
-class Category {
-    String title
-    Boolean isChecked
+import grails.compiler.GrailsCompileStatic
 
-    static constraints = {
-    }
+@GrailsCompileStatic
+class Step {
+  String title
+  Boolean isDone
+
+  static constraints = {
+  }
 }

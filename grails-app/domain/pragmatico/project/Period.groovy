@@ -1,8 +1,12 @@
 package pragmatico.project
 
-class Step {
-  String title
-  Boolean isDone
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
+class Period {
+  String name
+  String duration
+  Integer sale
 
   static constraints = {
   }

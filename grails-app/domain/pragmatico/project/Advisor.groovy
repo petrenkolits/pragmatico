@@ -1,6 +1,9 @@
 package pragmatico.project
 
-class Founder {
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
+class Advisor {
   String photo
   String name
   String desc

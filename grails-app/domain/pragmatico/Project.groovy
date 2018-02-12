@@ -1,52 +1,15 @@
 package pragmatico
 
 import grails.compiler.GrailsCompileStatic
-import grails.databinding.BindingFormat
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import org.bson.types.ObjectId
+import pragmatico.project.*
 
 @GrailsCompileStatic
 @EqualsAndHashCode(includes = 'id')
 @ToString(includes = 'id', includeNames = true, includePackage = false)
 class Project implements Serializable {
-
-  class Category {
-    String title
-    Boolean isChecked
-  }
-
-  class Step {
-    String title
-    Boolean isDone
-  }
-
-  class Period {
-    String name
-    String duration
-    Integer sale
-  }
-
-  class Founder {
-    String photo
-    String name
-    String desc
-    String exp
-    String fblink
-    String twitterlink
-    String linkedinlink
-  }
-
-  class Advisor {
-    String photo
-    String name
-    String desc
-    String exp
-    String fblink
-    String twitterlink
-    String linkedinlink
-  }
-
   ObjectId id
   Date dateCreated
   Date lastUpdated
@@ -70,22 +33,15 @@ class Project implements Serializable {
   String whatTokenFor
   String currencies
   String restTokens
-  Integer softCap
-  Integer hardCap
+  Integer softcap
+  Integer hardcap
   Integer tokenbaseprice
   Integer tokensize
-
-  @BindingFormat("yyyy-MM-dd")
   Date roadmapEnd
-  @BindingFormat("yyyy-MM-dd'T'hh:mm")
   Date startdate
-  @BindingFormat("yyyy-MM-dd'T'hh:mm")
   Date enddate
-  @BindingFormat("yyyy-MM-dd'T'hh:mm")
   Date preIcoStart
-  @BindingFormat("yyyy-MM-dd'T'hh:mm")
   Date icoStart
-  @BindingFormat("yyyy-MM-dd'T'hh:mm")
   Date icoEnd
 
   List<Category> categories
@@ -93,12 +49,24 @@ class Project implements Serializable {
   List<Period> periods
   List<Founder> founders
   List<Advisor> advisors
+  Status status
 
   static embedded = ['categories', 'steps', 'periods', 'founders', 'advisors']
 
   static belongsTo = [account: Account]
 
-//  static constraints = {}
+  static constraints = {
+    twitterlink blank: true, nullable: true
+    bitcoinlink blank: true, nullable: true
+    telegramlink blank: true, nullable: true
+    fblink blank: true, nullable: true
+    youtube blank: true, nullable: true
+    status bindable: false, nullable: true
+  }
 
-//  static mapping = {}
+  static mapping = {
+    collection 'projects'
+    account attr: 'accountId', index: true
+    status defaultValue: Status.PENDING, enumType: 'string', index: true
+  }
 }

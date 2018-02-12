@@ -1,6 +1,6 @@
 package pragmatico
 
-class ProfileController implements  AuthenticatedController {
+class ProfileController implements AuthenticatedController {
   ProfileService profileService
 
   def update() {
