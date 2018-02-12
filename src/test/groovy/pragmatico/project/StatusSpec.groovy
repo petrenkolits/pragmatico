@@ -1,10 +1,9 @@
-package pragmatico.pragmatico
+package pragmatico.project
 
-import grails.testing.services.ServiceUnitTest
-
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class SignUpServiceSpec extends Specification implements ServiceUnitTest<SignUpService>{
+class StatusSpec extends Specification implements DomainUnitTest<Status> {
 
     def setup() {
     }
