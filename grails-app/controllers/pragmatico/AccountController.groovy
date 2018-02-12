@@ -1,13 +1,10 @@
 package pragmatico
 
-import pragmatico.commands.account.SignIn
+import pragmatico.commands.account.*
 
 class AccountController implements ExceptionHandler {
-  def signUpService
-
-  def signUp() {
-    def data = request.JSON
-    [token: signUpService.viaCreds(data.username, data.password)]
+  def signUp(SignUp cmd) {
+    cmd().hasErrors() ? renderErrors(cmd.errors) : [token: cmd.result]
   }
 
   def signIn(SignIn cmd) {

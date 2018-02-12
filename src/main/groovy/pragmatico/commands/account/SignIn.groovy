@@ -19,9 +19,8 @@ class SignIn implements Validateable, Serializable {
 
   @Memoized
   String getToken() {
-    if (!username || !password) {
-      return
+    if (username && password) {
+      signInService.viaCreds username, password
     }
-    signInService.viaCreds(username, password)
   }
 }

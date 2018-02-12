@@ -1,7 +1,7 @@
 package pragmatico.pragmatico
 
 import grails.testing.services.ServiceUnitTest
-import pragmatico.SignUpService
+
 import spock.lang.Specification
 
 class SignUpServiceSpec extends Specification implements ServiceUnitTest<SignUpService>{
