@@ -1,13 +1,15 @@
 package pragmatico.admin
 
-//import pragmatico.Project
+import grails.compiler.GrailsCompileStatic
+import pragmatico.Project
 
+@GrailsCompileStatic
 class ProjectsController extends AdminController {
   def index() {
-    [projects: Project.findAll()]
+    render view: '/admin/projects/index', model: [projects: Project.findAll()]
   }
 
   def show() {
-    [project: Project.findById(params.id)]
+    render view: '/admin/projects/show', model: [project: Project.findById(params.id)]
   }
 }
