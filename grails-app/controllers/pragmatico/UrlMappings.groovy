@@ -9,10 +9,10 @@ class UrlMappings {
       put "/profile"(controller: 'profile', action: 'update')
 
       group '/admin', {
-        "/projects"(resources: 'project', namespace: 'admin', includes: ['index', 'show'])
+        "/projects"(resources: 'projects', namespace: 'admin', includes: ['index', 'show'])
       }
 
-      "/projects"(resources: 'project', includes: ['index', 'create'])
+      "/projects"(resources: 'projects', includes: ['index', 'save', 'show'])
     }
 
 //    delete "/$controller/$id(.$format)?"(action: "delete")
