@@ -1,5 +1,8 @@
 package pragmatico
 
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
 class ProfileController implements AuthenticatedController {
   ProfileService profileService
 

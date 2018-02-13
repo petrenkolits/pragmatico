@@ -16,7 +16,7 @@ class SignUp extends Interactionable {
     password blank: false
   }
 
-  def call() {
+  SignUp call() {
     if (!hasErrors()) {
       Account account = new Account(username: username, password: password.encodeAsSHA256() as String, roles: ['user'])
       if (account.save()) {

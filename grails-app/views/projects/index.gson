@@ -4,4 +4,4 @@ model {
   List<Project> projects
 }
 
-json g.render(projects)
+json g.render(this.projects)

@@ -16,7 +16,7 @@ class SignIn extends Interactionable {
     password blank: false
   }
 
-  def call() {
+  SignIn call() {
     if (!hasErrors()) {
       Account account = Account.findByUsernameAndPassword(username, password.encodeAsSHA256() as String)
       if (account) {

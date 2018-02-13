@@ -1,5 +1,8 @@
 package pragmatico
 
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
 class AuthInterceptor {
   AuthInterceptor() {
     matchAll().except(controller: 'account').except(controller: 'application').except(view: '/error').except(view: '/notFound')
