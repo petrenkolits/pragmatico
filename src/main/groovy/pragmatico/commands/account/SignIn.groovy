@@ -1,19 +1,20 @@
 package pragmatico.commands.account
 
 import grails.compiler.GrailsCompileStatic
+import grails.validation.Validateable
 import pragmatico.Account
 import pragmatico.JwtService
-import pragmatico.commands.Interactionable
 
 @GrailsCompileStatic
-class SignIn extends Interactionable {
+class SignIn implements Validateable {
   String username
   String password
+  String result
 
   static constraints = {
-    importFrom Interactionable
     username blank: false
     password blank: false
+    result bindable: false, nullable: true
   }
 
   SignIn call() {

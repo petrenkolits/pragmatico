@@ -3,17 +3,17 @@ package pragmatico
 import grails.compiler.GrailsCompileStatic
 
 @GrailsCompileStatic
-class AuthInterceptor {
-  AuthInterceptor() {
-    matchAll().except(controller: 'account').except(controller: 'application').except(view: '/error').except(view: '/notFound')
-  }
-
+class ProjectsInterceptor {
   boolean before() {
     def hash = JwtService.decodeFromAuthHeader(request.getHeader('Authorization'))
 
     if (hash && hash['id']) {
-      println("User ID: ${hash['id']}")
-      return true
+      Account account = Account.findById(hash['id'])
+      if (account) {
+        println("User ID: ${hash['id']}")
+        request.setAttribute('currentUser', account)
+        return true
+      }
     }
 
     response.sendError(401)

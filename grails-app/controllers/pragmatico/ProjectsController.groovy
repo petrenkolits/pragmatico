@@ -1,20 +1,17 @@
 package pragmatico
 
 import grails.compiler.GrailsCompileStatic
+import pragmatico.commands.project.Create
 import pragmatico.commands.project.Index
-import pragmatico.project.Status
 
 @GrailsCompileStatic
-class ProjectsController implements AuthenticatedController, ExceptionHandler {
+class ProjectsController implements ExceptionHandler {
   def index(Index cmd) {
     [projects: cmd().result]
   }
 
-  def save(Project project) {
-    project.account = currentUser
-//    project.status = Status.PENDING
-    project.status = Status.APPROVED
-    project.validate() ? project.save() : renderErrors(project.errors)
+  def save(Create cmd) {
+    cmd(request.getAttribute('currentUser') as Account).hasErrors() ? renderErrors(cmd.errors) : [project: cmd.result]
   }
 
   def show() {

@@ -1,6 +1,7 @@
 package pragmatico.project
 
 import grails.testing.gorm.DomainUnitTest
+import pragmatico.fields.project.embedds.Status
 import spock.lang.Specification
 
 class StatusSpec extends Specification implements DomainUnitTest<Status> {

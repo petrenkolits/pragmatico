@@ -1,11 +1,11 @@
-package pragmatico.project
+package pragmatico.fields.project.embedds
 
 import grails.compiler.GrailsCompileStatic
 
 @GrailsCompileStatic
-class Category {
+class Step {
   String title
-  Boolean isChecked
+  Boolean isDone
 
   static constraints = {
   }

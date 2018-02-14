@@ -1,17 +1,19 @@
 package pragmatico.commands.project
 
 import grails.compiler.GrailsCompileStatic
+import grails.validation.Validateable
 import pragmatico.Project
-import pragmatico.commands.Interactionable
-import pragmatico.project.Status
+
+import pragmatico.fields.project.embedds.Status
 
 @GrailsCompileStatic
-class Index extends Interactionable {
+class Index implements Validateable {
   String type
+  List<Project> result
 
   static constraints = {
-    importFrom Interactionable
     type blank: true, nullable: true
+    result bindable: false, nullable: true
   }
 
   Index call() {

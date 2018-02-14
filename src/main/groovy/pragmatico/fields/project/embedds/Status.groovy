@@ -1,4 +1,4 @@
-package pragmatico.project
+package pragmatico.fields.project.embedds
 
 import groovy.transform.CompileStatic
 
