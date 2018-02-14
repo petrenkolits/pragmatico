@@ -35,5 +35,7 @@ class Project extends ProjectProperties implements Serializable {
     collection 'projects'
     account attr: 'accountId', index: true
     status defaultValue: Status.PENDING, enumType: 'string', index: true
+    dateCreated index: true
+    lastUpdated index: true
   }
 }

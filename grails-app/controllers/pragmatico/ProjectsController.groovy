@@ -11,10 +11,14 @@ class ProjectsController implements ExceptionHandler {
   }
 
   def save(Create cmd) {
-    cmd(request.getAttribute('currentUser') as Account).hasErrors() ? renderErrors(cmd.errors) : [project: cmd.result]
+    cmd(currentUser).hasErrors() ? renderErrors(cmd.errors) : [project: cmd.result]
   }
 
   def show() {
     [project: Project.findById(params.id)]
+  }
+
+  private Account getCurrentUser() {
+    request.getAttribute('currentUser') as Account
   }
 }

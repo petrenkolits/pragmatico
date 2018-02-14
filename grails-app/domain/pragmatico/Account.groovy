@@ -32,4 +32,8 @@ class Account implements Serializable {
   }
 
   static hasMany = [projects: Project]
+
+  Boolean getIsAdmin() {
+    this.roles &&     this.roles.contains('admin')
+  }
 }

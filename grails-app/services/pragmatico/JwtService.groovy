@@ -31,7 +31,6 @@ class JwtService {
       def token = authHeader.split(' ').last()
 
       if (token) {
-        println("Token: ${token}")
         return decode(token)
       }
     }
