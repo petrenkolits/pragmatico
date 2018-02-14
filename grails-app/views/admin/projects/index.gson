@@ -1,17 +1,9 @@
-import org.bson.Document
-import pragmatico.Project
-
 model {
   Map result
 }
 
 json {
-//  results g.render(result.projects, [includes: ['id', 'name', 'status']])
-  results {
-    result.projects.each { Document doc ->
-      project(xxx: doc.get("_id").toString())
-    }
-  }
-  metadata result.metadata
+  results g.render(result.documentList)
+  metadata g.render(result.metadata)
 }
 

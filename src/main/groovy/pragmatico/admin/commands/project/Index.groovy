@@ -18,8 +18,12 @@ class Index implements Validateable {
 
   Index call() {
 //    List<Project> res = Project.findAll(max: limit, offset: offset, sort: 'lastUpdated', order: 'desc') { }
-    List res = Project.collection.find().projection(fields(include('name', 'status'))).limit(limit).skip(offset).toList()
-    setResult projects: res, metadata: [total: Project.count(), limit: limit, offset: offset]
+    List res = Project.collection.find()
+      .projection(fields(include('name', 'status')))
+      .limit(limit).skip(offset).toList().collect { doc ->
+        [id: doc._id.toString(), name: doc.name, status: doc.status]
+      }
+    setResult documentList: res, metadata: [total: Project.count(), limit: limit, offset: offset]
     this
   }
 }
