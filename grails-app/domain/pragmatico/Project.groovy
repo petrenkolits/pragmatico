@@ -14,7 +14,7 @@ class Project extends ProjectProperties implements Serializable {
   ObjectId id
   Date dateCreated
   Date lastUpdated
-  Status status
+  Status status = Status.APPROVED // TODO change it to PENDING once admin part is ready
   Float rating
 
   static embedded = ['categories', 'steps', 'periods', 'founders', 'advisors']
@@ -27,8 +27,8 @@ class Project extends ProjectProperties implements Serializable {
     telegramlink blank: true, nullable: true
     fblink blank: true, nullable: true
     youtube blank: true, nullable: true
-    status bindable: false, nullable: true
     rating bindable: false, nullable: true
+    status bindable: false
   }
 
   static mapping = {
