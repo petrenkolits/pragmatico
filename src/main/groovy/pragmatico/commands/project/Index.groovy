@@ -9,6 +9,9 @@ import pragmatico.fields.project.embedds.Status
 @GrailsCompileStatic
 class Index implements Validateable {
   String type
+  String sort = 'rating'
+  String order = 'desc'
+  Integer limit = 6
   List<Project> result
 
   static constraints = {
@@ -17,7 +20,7 @@ class Index implements Validateable {
   }
 
   Index call() {
-    setResult Project.findAllByStatus(Status.APPROVED, [max: 4])
+    setResult Project.findAllByStatus(Status.APPROVED, [max: limit, sort: sort, order: order])
     this
   }
 }

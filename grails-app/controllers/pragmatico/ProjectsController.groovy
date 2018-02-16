@@ -3,6 +3,7 @@ package pragmatico
 import grails.compiler.GrailsCompileStatic
 import pragmatico.commands.project.Create
 import pragmatico.commands.project.Index
+import pragmatico.commands.project.Show
 
 @GrailsCompileStatic
 class ProjectsController implements ExceptionHandler {
@@ -14,8 +15,8 @@ class ProjectsController implements ExceptionHandler {
     cmd(currentUser).hasErrors() ? renderErrors(cmd.errors) : [project: cmd.result]
   }
 
-  def show() {
-    [project: Project.findById(params.id)]
+  def show(Show cmd) {
+    [project: cmd().result]
   }
 
   private Account getCurrentUser() {

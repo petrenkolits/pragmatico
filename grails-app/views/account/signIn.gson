@@ -1,5 +1,3 @@
-import pragmatico.commands.account.SignIn
-
 model {
   String token
 }

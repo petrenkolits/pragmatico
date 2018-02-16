@@ -17,7 +17,8 @@ class Index implements Validateable {
   }
 
   Index call() {
-//    List<Project> res = Project.findAll(max: limit, offset: offset, sort: 'lastUpdated', order: 'desc') { }
+    // List<Project> res = Project.findAll(max: limit, offset: offset, sort: 'lastUpdated', order: 'desc') { }
+    // we do not need to instantiate project models actually, so deal with mongo doc and fetch only required fields
     List res = Project.collection.find()
       .projection(fields(include('name', 'status')))
       .limit(limit).skip(offset).toList().collect { doc ->
