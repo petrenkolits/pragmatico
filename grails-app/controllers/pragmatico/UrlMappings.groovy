@@ -7,6 +7,7 @@ class UrlMappings {
     post "/sign-in"(controller: 'account', action: 'signIn')
     group '/api', {
       put "/profile"(controller: 'profile', action: 'update')
+      get "/facebook"(controller: 'facebook', action: 'index')
 
       group '/admin', {
         "/projects"(resources: 'projects', namespace: 'admin', includes: ['index', 'show'])
