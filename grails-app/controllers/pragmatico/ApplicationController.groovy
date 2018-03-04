@@ -3,6 +3,7 @@ package pragmatico
 import grails.compiler.GrailsCompileStatic
 import grails.core.GrailsApplication
 import grails.plugins.*
+import pragmatico.social.scrapers.Facebook
 
 @GrailsCompileStatic
 class ApplicationController implements PluginManagerAware {
@@ -11,6 +12,7 @@ class ApplicationController implements PluginManagerAware {
   GrailsPluginManager pluginManager
 
   def index() {
-    [grailsApplication: grailsApplication, pluginManager: pluginManager]
+    def fb = new Facebook(grailsApplication.config.getProperty('grails.social.fbToken'))
+    [data: fb.getData('cocacola'), grailsApplication: grailsApplication, pluginManager: pluginManager]
   }
 }

@@ -59,6 +59,8 @@ grails:
     defaultScope: singleton
   converters:
     encoding: UTF-8
+  social:
+    fbToken: 170421203608586|rhkqftbO_aHnWfT83tzSrrqtCcA
 
 ---
 environments:
