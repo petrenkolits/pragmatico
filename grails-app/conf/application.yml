@@ -60,7 +60,13 @@ grails:
   converters:
     encoding: UTF-8
   social:
-    fbToken: 170421203608586|rhkqftbO_aHnWfT83tzSrrqtCcA
+    fb:
+      token: 170421203608586|rhkqftbO_aHnWfT83tzSrrqtCcA
+    tw:
+      cKey: MZierW1ZBBFZHeBp743WXSZlk
+      cSec: cBoHX8SCGxQGPFCiuTdE9SaiwiCX27SMovlpUB3isOAKMLIsmm
+      aTok: 468532824-QdnZnFvEO0ebmgH1Fc3XZdI5ZadxIsVFjFS9JyLI
+      tSec: n7fQj1vkpg6P6qZnkLRfRckxM5PqD8NTvj2ET4HZYRrNS
 
 ---
 environments:

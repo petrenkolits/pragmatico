@@ -6,11 +6,13 @@ import org.grails.core.artefact.*
 model {
   GrailsApplication grailsApplication
   GrailsPluginManager pluginManager
-  Object data
+  Object fb
+  Object tw
 }
 
 json {
-  data data
+  fb fb
+  tw tw
   message "Welcome to Grails!"
   environment Environment.current.name
   appversion grailsApplication.metadata.getApplicationVersion()

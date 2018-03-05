@@ -6,7 +6,9 @@ import com.restfb.FacebookClient
 import com.restfb.Parameter
 import com.restfb.Version
 import com.restfb.types.Post
+import groovy.transform.CompileStatic
 
+@CompileStatic
 class Facebook {
   private final FacebookClient fbClient
 
@@ -14,7 +16,7 @@ class Facebook {
     fbClient = new DefaultFacebookClient(token, Version.VERSION_2_5)
   }
 
-  List<Map> getData(pageName) {
+  List<?> getData(String pageName) {
     Date since = new Date() - 100
     Connection<Post> conn = fbClient.fetchConnection("${pageName}/posts", Post.class,
       Parameter.with("fields", "id,created_time,shares,reactions.limit(0).summary(1)"),
