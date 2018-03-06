@@ -34,7 +34,7 @@ spring:
 
 # Spring Actuator Endpoints are Disabled by Default
 endpoints:
-  enabled: false
+  enabled: true
   jmx:
     enabled: true
 
@@ -59,14 +59,6 @@ grails:
     defaultScope: singleton
   converters:
     encoding: UTF-8
-  social:
-    fb:
-      token: 170421203608586|rhkqftbO_aHnWfT83tzSrrqtCcA
-    tw:
-      cKey: MZierW1ZBBFZHeBp743WXSZlk
-      cSec: cBoHX8SCGxQGPFCiuTdE9SaiwiCX27SMovlpUB3isOAKMLIsmm
-      aTok: 468532824-QdnZnFvEO0ebmgH1Fc3XZdI5ZadxIsVFjFS9JyLI
-      tSec: n7fQj1vkpg6P6qZnkLRfRckxM5PqD8NTvj2ET4HZYRrNS
 
 ---
 environments:

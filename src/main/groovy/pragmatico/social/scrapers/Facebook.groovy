@@ -16,14 +16,13 @@ class Facebook {
     fbClient = new DefaultFacebookClient(token, Version.VERSION_2_5)
   }
 
-  List<?> getData(String pageName) {
-    Date since = new Date() - 100
+  FbEntity[] getData(String pageName, Date startDate) {
     Connection<Post> conn = fbClient.fetchConnection("${pageName}/posts", Post.class,
-      Parameter.with("fields", "id,created_time,shares,reactions.limit(0).summary(1)"),
-      Parameter.with("limit", 100),
-      Parameter.with("since", since))
+      Parameter.with('fields', 'id,created_time,shares,reactions.limit(0).summary(1)'),
+      Parameter.with('limit', 100),
+      Parameter.with('since', startDate))
     conn.data.collect { Post p ->
-      [id: p.id, createdAt: p.createdTime, shares: p.sharesCount, reactions: p.reactionsCount]
-    }
+      new FbEntity(id: p.id, createdAt: p.createdTime, shares: p.sharesCount, reactions: p.reactionsCount)
+    } as FbEntity[]
   }
 }

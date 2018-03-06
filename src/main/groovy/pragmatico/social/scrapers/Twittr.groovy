@@ -11,7 +11,7 @@ class Twittr {
   private final Twitter twitter
 
   Twittr(String key, String secret, String token, String tokenSecret) {
-    ConfigurationBuilder cb = new ConfigurationBuilder();
+    ConfigurationBuilder cb = new ConfigurationBuilder()
     cb.setDebugEnabled(true)
       .setOAuthConsumerKey(key)
       .setOAuthConsumerSecret(secret)
@@ -20,10 +20,13 @@ class Twittr {
     twitter = new TwitterFactory(cb.build()).getInstance()
   }
 
-  List<?> getData(String user) {
+  TwEntity[] getData(String user, Date startDate) {
     List<Status> statuses = twitter.getUserTimeline(user)
-    statuses.collect { Status st ->
-      [id: st.id, test: st.text, createdAt: st.createdAt, retweetCount: st.retweetCount, favoriteCount: st.favoriteCount]
-    }
+    statuses.inject([]) { List<?> list, Status st ->
+      if (st.createdAt > startDate) {
+        list << new TwEntity(id: st.id as String, createdAt: st.createdAt, retweetCount: st.retweetCount, favoriteCount: st.favoriteCount)
+      }
+      list
+    } as TwEntity[]
   }
 }
