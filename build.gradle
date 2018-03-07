@@ -52,6 +52,7 @@ dependencies {
   compile 'org.grails.plugins:quartz:2.0.13'
   compile 'com.restfb:restfb:2.2.0'
   compile 'org.twitter4j:twitter4j-core:4.0.6'
+  compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
   console 'org.grails:grails-console'
   profile 'org.grails.profiles:rest-api'
   runtime 'org.glassfish.web:el-impl:2.1.2-b03'

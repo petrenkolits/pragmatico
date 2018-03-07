@@ -19,6 +19,10 @@ class ProjectsController implements ExceptionHandler {
     [project: cmd().result]
   }
 
+  def myProjects(Index cmd) {
+    [projects: cmd(currentUser).result]
+  }
+
   private Account getCurrentUser() {
     request.getAttribute('currentUser') as Account
   }

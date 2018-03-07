@@ -2,6 +2,7 @@ package pragmatico.commands.project
 
 import grails.compiler.GrailsCompileStatic
 import grails.validation.Validateable
+import pragmatico.Account
 import pragmatico.Project
 
 import pragmatico.fields.project.embedds.Status
@@ -19,8 +20,9 @@ class Index implements Validateable {
     result bindable: false, nullable: true
   }
 
-  Index call() {
-    setResult Project.findAllByStatus(Status.APPROVED, [max: limit, sort: sort, order: order])
+  Index call(Account currentUser = null) {
+    def mod = [max: limit, sort: sort, order: order]
+    setResult currentUser ? Project.findAllByAccount(currentUser, mod) : Project.findAllByStatus(Status.APPROVED, mod)
     this
   }
 }

@@ -13,6 +13,7 @@ class UrlMappings {
       }
 
       "/projects"(resources: 'projects', includes: ['index', 'save', 'show'])
+      "/my-projects"(controller: 'projects', action: 'myProjects')
     }
 
 //    delete "/$controller/$id(.$format)?"(action: "delete")

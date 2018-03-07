@@ -7,7 +7,7 @@ import com.restfb.Parameter
 import com.restfb.Version
 import com.restfb.types.Post
 import groovy.transform.CompileStatic
-import rating.calculatators.FbEntity
+import pragmatico.calculatators.FbEntity
 
 @CompileStatic
 class Facebook {
@@ -18,6 +18,9 @@ class Facebook {
   }
 
   FbEntity[] getData(String pageName, Date startDate) {
+    if (!pageName) {
+      return [] as FbEntity[]
+    }
     Connection<Post> conn = fbClient.fetchConnection("${pageName}/posts", Post.class,
       Parameter.with('fields', 'id,created_time,shares,reactions.limit(0).summary(1)'),
       Parameter.with('limit', 100),

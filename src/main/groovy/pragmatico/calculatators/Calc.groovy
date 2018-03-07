@@ -1,4 +1,4 @@
-package rating.calculatators
+package pragmatico.calculatators
 
 import groovy.transform.CompileStatic
 
