@@ -1,4 +1,4 @@
-package pragmatico.social.scrapers
+package rating.calculatators
 
 class TwEntity {
   String id

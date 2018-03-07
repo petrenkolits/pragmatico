@@ -1,8 +1,6 @@
 package rating.calculatators
 
 import groovy.transform.CompileStatic
-import pragmatico.social.scrapers.FbEntity
-import pragmatico.social.scrapers.TwEntity
 
 @CompileStatic
 class Calc {

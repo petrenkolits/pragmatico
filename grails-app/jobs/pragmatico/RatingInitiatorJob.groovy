@@ -3,6 +3,8 @@ package pragmatico
 import grails.plugins.quartz.QuartzJob
 import groovy.transform.CompileDynamic
 import org.bson.conversions.Bson
+import rating.calculatators.ProjectEntity
+
 import static com.mongodb.client.model.Projections.fields
 import static com.mongodb.client.model.Projections.include
 import static com.mongodb.client.model.Filters.or
@@ -21,7 +23,7 @@ class RatingInitiatorJob implements QuartzJob {
 
   def execute(context) {
     Project.collection.find(selector).projection(projection).toList().each {
-      ProjectRatingCalcJob.triggerNow it
+      ProjectRatingCalcJob.triggerNow(it as ProjectEntity)
     }
   }
 }

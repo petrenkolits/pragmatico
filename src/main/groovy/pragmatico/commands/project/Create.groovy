@@ -6,7 +6,6 @@ import pragmatico.Account
 import pragmatico.Project
 import pragmatico.StaticRatingCalculatorService
 import pragmatico.fields.project.ProjectProperties
-import pragmatico.fields.project.embedds.Status
 
 @GrailsCompileStatic
 class Create extends ProjectProperties implements Validateable {
@@ -28,7 +27,7 @@ class Create extends ProjectProperties implements Validateable {
       Project project = new Project(this.properties)
       project.account = account
       if (project.validate()) {
-        project.rating = staticRatingCalculatorService.perform(project)
+        project.initialRating = staticRatingCalculatorService.perform(project)
         project.save() ? setResult(project) : setErrors(project.errors)
       } else {
         setErrors(project.errors)

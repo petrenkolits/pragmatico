@@ -7,6 +7,7 @@ import com.restfb.Parameter
 import com.restfb.Version
 import com.restfb.types.Post
 import groovy.transform.CompileStatic
+import rating.calculatators.FbEntity
 
 @CompileStatic
 class Facebook {
