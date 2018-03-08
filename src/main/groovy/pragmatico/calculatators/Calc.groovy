@@ -11,4 +11,8 @@ class Calc {
   static RatingProvider from(FbEntity[] entities) {
     new Facebook(entities: entities)
   }
+
+  static  RatingProvider from(BttalkEntity[] entities) {
+    new Bttalk(entities: entities)
+  }
 }

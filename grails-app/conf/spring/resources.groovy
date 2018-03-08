@@ -1,3 +1,4 @@
+import pragmatico.social.scrapers.Bttalk
 import pragmatico.social.scrapers.Facebook
 import pragmatico.social.scrapers.Twittr
 
@@ -11,4 +12,5 @@ beans = {
 
   facebook Facebook, fbToken
   twittr Twittr, twCKey, twCSec, twATok, twTSec
+  bttalk Bttalk
 }
