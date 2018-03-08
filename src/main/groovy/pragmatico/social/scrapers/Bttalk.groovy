@@ -12,6 +12,7 @@ class Bttalk {
   static String nextLinkTag = 'span'
   static String lastPostCss = ' lastpostcol'
   static String lastPostSplitter = 'by'
+  static String userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/604.5.6 (KHTML, like Gecko) Version/11.0.3 Safari/604.5.6'
 
   static String nextPage(GPathResult result) {
     if (!result) {
@@ -33,7 +34,7 @@ class Bttalk {
 
   static <T> T withUrlReader(URL url, Closure<T> closure) {
     url.openConnection().with {
-      setRequestProperty("User-Agent", "Firefox/2.0.0.4")
+      setRequestProperty('User-Agent', userAgent)
       inputStream.withReader('UTF-8') {
         closure.call it
       }
