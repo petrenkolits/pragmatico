@@ -3,7 +3,7 @@ package pragmatico
 import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
 
-class ProjectsInterceptorSpec extends Specification implements InterceptorUnitTest<ProjectsInterceptor> {
+class AuthInterceptorSpec extends Specification implements InterceptorUnitTest<AuthInterceptor> {
 
     def setup() {
     }

@@ -37,6 +37,9 @@ endpoints:
   enabled: true
   jmx:
     enabled: true
+management:
+  security:
+    enabled: false
 
 ---
 grails:
