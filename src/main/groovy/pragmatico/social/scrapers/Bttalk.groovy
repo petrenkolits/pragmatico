@@ -14,10 +14,15 @@ class Bttalk {
   static String lastPostSplitter = 'by'
 
   static String nextPage(GPathResult result) {
-    result.depthFirst().findAll { it.name() == nextLinkTag && it.@class == nextLinkCss }*.a*.@href.unique().last()
+    if (!result) {
+      return null
+    }
+    result.depthFirst().findAll {
+      it.name() == nextLinkTag && it.@class == nextLinkCss
+    }*.a*.@href.unique().last()
   }
 
-  static List getPosts(GPathResult result) {
+  static List getPostsDates(GPathResult result) {
     if (!result) {
       return null
     }
@@ -26,26 +31,33 @@ class Bttalk {
     }*.text()*.split(lastPostSplitter)*.first()
   }
 
+  static <T> T withUrlReader(URL url, Closure<T> closure) {
+    url.openConnection().with {
+      setRequestProperty("User-Agent", "Firefox/2.0.0.4")
+      inputStream.withReader('UTF-8') {
+        closure.call it
+      }
+    }
+  }
+
   static Date[] fetchData(pageUrl, Date startDate) {
     if (!pageUrl) {
       return [] as Date[]
     }
     GPathResult result
-    URL url = pageUrl.toURL()
-    Date[] res = url.openConnection().with {
-      setRequestProperty("User-Agent", "Firefox/2.0.0.4")
-      inputStream.withReader( 'UTF-8' ) {
-        result = new XmlSlurper(new Parser()).parseText(it.text)
-        getPosts(result).collect { String date ->
-          new DateParser().parse(date).with {
-            first().getDates().first()
-          }
-        }.findAll { it >= startDate } as Date[]
-      }
+    DateParser dateParser = new DateParser()
+    Date[] res = withUrlReader(pageUrl.toURL() as URL) {
+      result = new XmlSlurper(new Parser()).parseText(it.text)
+      getPostsDates(result).collect { String date ->
+        dateParser.parse(date).with {
+          first().getDates().first()
+        }
+      }.findAll { it >= startDate } as Date[]
     }
     if (res.size() != 0 && res.last() > startDate) {
-      println "Going to: ${nextPage(result)}"
-      res += fetchData(nextPage(result), startDate)
+      def nPage = nextPage(result)
+      println "Going to: ${nPage}"
+      res += fetchData(nPage, startDate)
     }
     res
   }
