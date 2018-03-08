@@ -4,7 +4,7 @@ import grails.plugins.quartz.QuartzJob
 import groovy.transform.CompileDynamic
 import org.bson.conversions.Bson
 import org.quartz.JobExecutionContext
-import pragmatico.calculatators.ProjectEntity
+import pragmatico.calculators.ProjectEntity
 
 import static com.mongodb.client.model.Projections.fields
 import static com.mongodb.client.model.Projections.include

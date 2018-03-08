@@ -1,8 +1,8 @@
-package pragmatico.calculatators
+package pragmatico.calculators
 
 import groovy.transform.CompileStatic
 
 @CompileStatic
 class BttalkEntity {
-  String url
+  Date postDate
 }

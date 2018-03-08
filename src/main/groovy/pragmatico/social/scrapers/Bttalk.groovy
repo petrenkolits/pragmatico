@@ -1,48 +1,59 @@
 package pragmatico.social.scrapers
 
-import groovy.transform.CompileStatic
-import groovy.util.slurpersupport.GPathResult
+import groovy.transform.CompileDynamic
 import org.ccil.cowan.tagsoup.Parser
-import pragmatico.calculatators.BttalkEntity
+import com.joestelmach.natty.Parser as DateParser
+import groovy.util.slurpersupport.GPathResult
+import pragmatico.calculators.BttalkEntity
 
-//println page.depthFirst().find { it.text() == 'North America'}
-//println page.depthFirst().find { it.text().contains('North America')}
-
-
-
-//System.setProperty('javax.xml.accessExternalSchema', 'all')
-//System.setProperty('javax.xml.accessExternalDTD', 'all')
-//
-//URL url = "https://bitcointalk.org/index.php?board=67.0".toURL()
-//
-//def tx = new XmlSlurper(false, false, true).with { x ->
-//  url.openConnection().with {
-//    // Pretend to be an old Firefox version
-//    setRequestProperty("User-Agent", "Firefox/2.0.0.4")
-//    // Get a reader
-//    inputStream.withReader( 'UTF-8' ) {
-//      // and parse it with the XmlSlurper
-//
-//      parse it
-//    }
-//  }
-//}
-//println tx.toString()
-
-
-@CompileStatic
+@CompileDynamic
 class Bttalk {
+  static String nextLinkCss = 'prevnext'
+  static String nextLinkTag = 'span'
+  static String lastPostCss = ' lastpostcol'
+  static String lastPostSplitter = 'by'
+
+  static String nextPage(GPathResult result) {
+    result.depthFirst().findAll { it.name() == nextLinkTag && it.@class == nextLinkCss }*.a*.@href.unique().last()
+  }
+
+  static List getPosts(GPathResult result) {
+    if (!result) {
+      return null
+    }
+    result.depthFirst().findAll {
+      it.@class.toString().indexOf(lastPostCss) > -1
+    }*.text()*.split(lastPostSplitter)*.first()
+  }
+
+  static Date[] fetchData(pageUrl, Date startDate) {
+    if (!pageUrl) {
+      return [] as Date[]
+    }
+    GPathResult result
+    URL url = pageUrl.toURL()
+    Date[] res = url.openConnection().with {
+      setRequestProperty("User-Agent", "Firefox/2.0.0.4")
+      inputStream.withReader( 'UTF-8' ) {
+        result = new XmlSlurper(new Parser()).parseText(it.text)
+        getPosts(result).collect { String date ->
+          new DateParser().parse(date).with {
+            first().getDates().first()
+          }
+        }.findAll { it >= startDate } as Date[]
+      }
+    }
+    if (res.size() != 0 && res.last() > startDate) {
+      println "Going to: ${nextPage(result)}"
+      res += fetchData(nextPage(result), startDate)
+    }
+    res
+  }
+
   BttalkEntity[] getData(String pageUrl, Date startDate) {
     if (!pageUrl) {
       return [] as BttalkEntity[]
     }
-    URL url = pageUrl.toURL()
-    GPathResult result = new XmlSlurper(new Parser()).with { x ->
-      url.openConnection().with {
-        setRequestProperty("User-Agent", "Firefox/2.0.0.4")
-        inputStream.withReader( 'UTF-8' ) { parse it }
-      }
-    }
-    [] as BttalkEntity[]
+    fetchData(pageUrl, startDate).collect { Date d -> new BttalkEntity(postDate: d) } as BttalkEntity[]
   }
 }

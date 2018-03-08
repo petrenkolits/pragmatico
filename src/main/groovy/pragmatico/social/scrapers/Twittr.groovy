@@ -1,7 +1,7 @@
 package pragmatico.social.scrapers
 
 import groovy.transform.CompileStatic
-import pragmatico.calculatators.TwEntity
+import pragmatico.calculators.TwEntity
 import twitter4j.Status
 import twitter4j.Twitter
 import twitter4j.TwitterFactory

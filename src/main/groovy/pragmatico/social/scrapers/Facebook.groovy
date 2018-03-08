@@ -7,7 +7,7 @@ import com.restfb.Parameter
 import com.restfb.Version
 import com.restfb.types.Post
 import groovy.transform.CompileStatic
-import pragmatico.calculatators.FbEntity
+import pragmatico.calculators.FbEntity
 
 @CompileStatic
 class Facebook {

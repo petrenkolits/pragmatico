@@ -1,4 +1,4 @@
-package pragmatico.calculatators
+package pragmatico.calculators
 
 import groovy.transform.CompileStatic
 

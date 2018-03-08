@@ -7,8 +7,8 @@ import org.quartz.JobExecutionContext
 import pragmatico.social.scrapers.Bttalk
 import pragmatico.social.scrapers.Facebook
 import pragmatico.social.scrapers.Twittr
-import pragmatico.calculatators.Calc
-import pragmatico.calculatators.ProjectEntity
+import pragmatico.calculators.Calc
+import pragmatico.calculators.ProjectEntity
 
 @CompileDynamic
 class ProjectRatingCalcJob implements QuartzJob {
