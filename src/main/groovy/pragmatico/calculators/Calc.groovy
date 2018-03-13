@@ -8,6 +8,14 @@ class Calc {
   private Project project
   private Double currRating = 0.0d
 
+  Calc() {
+    throw new Exception('anon constructor call!!!')
+  }
+
+  Calc(Project project) {
+    this.project = project
+  }
+
   static RatingProvider from(TwEntity[] entities) {
     new Twittr(entities: entities)
   }
@@ -21,28 +29,20 @@ class Calc {
   }
 
   static def withProject(Project project, Closure cl) {
-    Calc calc = new Calc(project: project)
+    Calc calc = new Calc(project)
     cl.delegate = calc
     cl()
     calc.applyRating()
   }
 
-  def twRating(Double val) {
-    this.currRating += val
-  }
-
-  def fbRating(Double val) {
-    this.currRating += val
-  }
-
-  def btRating(Double val) {
+  def addRating(Double val) {
     this.currRating += val
   }
 
   def applyRating() {
     project.with {
-      currentDynamicRating = currRating
-      Double newRating = initialRating + currRating
+      dynamicRating = currRating
+      Double newRating = staticRating + currRating
       ratingChange = newRating - rating
       rating = newRating
     }

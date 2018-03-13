@@ -27,7 +27,7 @@ class Create extends ProjectProperties implements Validateable {
       Project project = new Project(this.properties)
       project.account = account
       if (project.validate()) {
-        project.initialRating = staticRatingCalculatorService.perform(project)
+        project.staticRating = staticRatingCalculatorService.perform(project)
         project.save() ? setResult(project) : setErrors(project.errors)
       } else {
         setErrors(project.errors)

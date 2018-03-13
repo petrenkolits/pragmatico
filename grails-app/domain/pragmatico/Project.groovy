@@ -15,11 +15,11 @@ class Project extends ProjectProperties implements Serializable {
   Date dateCreated
   Date lastUpdated
   Status status = Status.APPROVED // TODO change it to PENDING once admin part is ready
-  Double initialRating = 0.0f
-  Double currentDynamicRating = 0.0f
+  Double staticRating = 0.0f
+  Double dynamicRating = 0.0f
   Double rating = 0.0f
   Double ratingChange = 0.0f
-  Date dynamicRatingUpdatedAt
+  Date ratingUpdatedAt
 
   static embedded = ['categories', 'steps', 'periods', 'founders', 'advisors']
 
@@ -31,8 +31,8 @@ class Project extends ProjectProperties implements Serializable {
     telegramlink blank: true, nullable: true
     fblink blank: true, nullable: true
     youtube blank: true, nullable: true
-    initialRating bindable: false, nullable: true
-    currentDynamicRating bindable: false, nullable: true
+    staticRating bindable: false, nullable: true
+    dynamicRating bindable: false, nullable: true
     rating bindable: false, nullable: true
     status bindable: false
   }
@@ -43,7 +43,7 @@ class Project extends ProjectProperties implements Serializable {
     status defaultValue: Status.PENDING, enumType: 'string', index: true
     dateCreated index: true
     lastUpdated index: true
-    initialRating index: true
+    staticRating index: true
     fblink index: true
     twitterlink index: true
     bitcoinlink index: true
