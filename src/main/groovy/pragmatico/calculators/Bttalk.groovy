@@ -6,8 +6,13 @@ import groovy.transform.CompileStatic
 class Bttalk implements RatingProvider {
   BttalkEntity[] entities
 
-  Float getRating() {
-    Double val = entities.size() * coefficient
-    [val, ratingCeil].min()
+  Double getRating() {
+    if (!entities) {
+      return 0
+    }
+    def uniqDates = entities*.postDate*.clearTime().unique()
+    def rating = entities.size() * coefficient
+    def val = uniqDates.size() ? rating / uniqDates.size() : 0 as Double
+    [val, ratingCeil].min() as Double
   }
 }

@@ -15,9 +15,10 @@ class Project extends ProjectProperties implements Serializable {
   Date dateCreated
   Date lastUpdated
   Status status = Status.APPROVED // TODO change it to PENDING once admin part is ready
-  Float initialRating = 0.0f
-  Float currentDynamicRating = 0.0f
-  Float rating = 0.0f
+  Double initialRating = 0.0f
+  Double currentDynamicRating = 0.0f
+  Double rating = 0.0f
+  Double ratingChange = 0.0f
   Date dynamicRatingUpdatedAt
 
   static embedded = ['categories', 'steps', 'periods', 'founders', 'advisors']

@@ -4,8 +4,8 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 interface RatingProvider {
-  static Float coefficient = 0.001f
-  static Float ratingCeil = 0.5f
+  static Double coefficient = 0.001f
+  static Double ratingCeil = 0.5f
 
-  Float getRating()
+  Double getRating()
 }

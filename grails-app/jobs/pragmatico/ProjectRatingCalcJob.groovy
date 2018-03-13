@@ -22,16 +22,22 @@ class ProjectRatingCalcJob implements QuartzJob {
 
   @Transactional
   def processProject(ProjectEntity item) {
+    log.info("Processing project: ${item.id}")
     Date startDate = (new Date() - 3).clearTime()
     Project project = Project.findById item.id
-    project?.with {
-      currentDynamicRating =
-        Calc.from(facebook.getData(item.fblink, startDate)).rating +
-        Calc.from(twittr.getData(item.twitterlink, startDate)).rating +
-        Calc.from(bttalk.getData(item.bitcoinlink, startDate)).rating as Float
-      rating = initialRating + currentDynamicRating as Float
-      dynamicRatingUpdatedAt = new Date()
-      save()
+    if (project) {
+      Calc.withProject(project) {
+        twRating Calc.from(twittr.getData(item.twitterlink, startDate)).rating
+        fbRating Calc.from(facebook.getData(item.fblink, startDate)).rating
+        btRating Calc.from(bttalk.getData(item.bitcoinlink, startDate)).rating
+      }
+      project.with {
+        dynamicRatingUpdatedAt = new Date()
+        save()
+      }
+      log.info("Project: ${item.id} new rating: ${project.rating}, change: ${project.ratingChange}")
+    } else {
+      log.error("Failed to fetch project: ${item.id}")
     }
   }
 }

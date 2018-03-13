@@ -15,14 +15,35 @@ class Index implements Validateable {
   Integer limit = 6
   List<Project> result
 
+  static Map<String, Closure<List<Project>>> projectTypeFilter = [
+    mostactive: { -> Project.findAllByStatus Status.APPROVED,
+      [max: 6, sort: 'dynamicRatingChange', order: 'desc'] },
+    passive: { -> },
+    biggestratio: { -> },
+    ongoingsinking: { -> },
+    mostperspective: { -> },
+    upcomingsinking: { -> }
+  ]
+
   static constraints = {
     type blank: true, nullable: true
     result bindable: false, nullable: true
   }
 
   Index call(Account currentUser = null) {
-    def mod = [max: limit, sort: sort, order: order]
-    setResult currentUser ? Project.findAllByAccount(currentUser, mod) : Project.findAllByStatus(Status.APPROVED, mod)
+    setResult currentUser ? getByUser(currentUser) : byType
     this
+  }
+
+  List<Project> getByType() {
+    if (projectTypeFilter[type]) {
+      projectTypeFilter[type].call()
+    } else {
+      Project.findAllByStatus(Status.APPROVED, [max: limit, sort: sort, order: order])
+    }
+  }
+
+  List<Project> getByUser(Account user) {
+    Project.findAllByAccount(user, [max: limit, sort: sort, order: order])
   }
 }

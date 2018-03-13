@@ -6,8 +6,13 @@ import groovy.transform.CompileStatic
 class Facebook implements RatingProvider {
   FbEntity[] entities
 
-  Float getRating() {
-    Float val = entities.sum { FbEntity e -> (e.reactions + e.shares) * coefficient } as Float
-    [val, ratingCeil].min()
+  Double getRating() {
+    if (!entities) {
+      return 0
+    }
+    def uniqDates = entities*.createdAt*.clearTime().unique()
+    def rating = entities.sum { FbEntity e -> (e.reactions + e.shares) * coefficient } as Double
+    def val = uniqDates.size() ? rating / uniqDates.size() : 0 as Double
+    [val, ratingCeil].min() as Double
   }
 }
